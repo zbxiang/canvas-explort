@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="800" style="border: 1px dashed #ccc;"></canvas>
+    <script>
+        function $$(id){
+            return document.getElementById(id);
+        }
+
+        window.onload = function() {
+            var cnv = $$('canvas');
+            var cxt = cnv.getContext('2d');
+
+            // clipPathImage();
+
+            function clipPathImage(e){
+                console.log(e);
+                // var x = e.layerX || e.offsetX;
+                // var y = e.layerY || e.offsetY;
+                var path = "M527.9,130.6c-14.1-17-33.5-31.8-57.6-44.1C425.5,63.7,366.8,51.1,305,51.1c-61.8,0-120.5,12.6-165.3,35.5c-24.1,12.3-43.5,27.1-57.6,44.1c-17,20.4-25.9,43.9-25.9,67.9V250h42h413.7h42v-51.5C553.8,174.6,544.9,151.1,527.9,130.6z";
+                cxt.save();
+                cxt.fillStyle = 'rgba(0,0,0,0)';
+                cxt.strokeStyle = 'rgba(0,0,0,0)';
+                cxt.lineWidth = 0;
+                // if ( ctx.isPointInPath(path, x, y)){
+                //     cxt.strokeStyle="red"
+                // } else {
+                //     cxt.strokeStyle="black";
+                // }
+
+                cxt.beginPath();
+                let p = new Path2D(path);
+                cxt.fill(p);
+                cxt.stroke(p);
+                cxt.closePath();
+                cxt.clip(p);
+                var image = new Image();
+                image.src = 'image/UB2_0529_front.jpg';
+                image.onload = function(){
+                    cxt.drawImage(image, 0, 0, cnv.width/2, cnv.height/2);
+                    cxt.restore();
+                }
+            }
+
+            cxt.addEventListener("mousemove",function(e){clipPathImage(e)});
+        }
+    </script>
+</body>
+</html>
