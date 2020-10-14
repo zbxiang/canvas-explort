@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>描边矩形</title>
+</head>
+<body>
+    <canvas id="canvas" width="200" height="150" style="border: 1px dashed gray;"></canvas>
+    <script>
+        function $$(id) {
+            return document.getElementById(id);
+        }
+
+        window.onload = function () {
+            var cnv = $$("canvas");
+            var cxt = cnv.getContext('2d');
+            cxt.strokeStyle = "red";
+            cxt.strokeRect(50, 50, 80, 80);
+        }
+    </script>
+</body>
+</html>
